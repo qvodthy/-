@@ -36,24 +36,20 @@ class breadCostTableKey {
 }
 
 class breadCostTable{
-    Hashtable table;
+    Hashtable<String, Integer> table;
 
     public breadCostTable(){
-        table = new Hashtable(30);
+        table = new Hashtable<>(30);
     }
 
     public void put(breadCostTableKey breadCostTableKey,int cost){
-        String key = new String();
-
-        key = String.valueOf(breadCostTableKey.iBreadLevel) + String.valueOf(breadCostTableKey.iChampionLevel);
+        String key = String.valueOf(breadCostTableKey.iBreadLevel) + String.valueOf(breadCostTableKey.iChampionLevel);
         table.put(key,cost);
     }
 
     public int get(breadCostTableKey breadCostTableKey){
-        String key = new String();
-
-        key = String.valueOf(breadCostTableKey.iBreadLevel) + String.valueOf(breadCostTableKey.iChampionLevel);
-        return (int) table.get(key);
+        String key = String.valueOf(breadCostTableKey.iBreadLevel) + String.valueOf(breadCostTableKey.iChampionLevel);
+        return table.get(key);
     }
 }
 
@@ -77,7 +73,7 @@ public class main {
         float fTempPossibilityOfBigSuccess;
         int iTempBreadLevel;
         int iBreadNumber;
-        int iTempCost = 0;
+        int iTempCost;
 
         for(i = 1; breadCostTableScanner.hasNextLine(); i++){
             breadCostTableKey.setBreadLevel(i);
@@ -133,15 +129,10 @@ public class main {
                 System.out.println();
             }
 
-            flag = false;
+            flag = true;
             while (flag) {
-                for (j = 0; j < (iArrayLength - 1); j++) {
-                    if (0 == x[j])
-                        continue;
-                    else {
-                        if (1 == x[j + 1])
-                            continue;
-                        else {
+                for (j = 0; j < (iArrayLength - 1); j++)
+                    if (1 == x[j] && 0 == x[j+1])  {
                             x[j] = 0;
                             x[j + 1] = 1;
 
@@ -185,8 +176,7 @@ public class main {
 
                             break;
                         }
-                    }
-                }
+                    
 
                 if ((iArrayLength - 1) == j)
                     flag = false;
